@@ -1,0 +1,19 @@
+.container {
+  width: $container-width-lg;
+  max-width: 100%;
+  margin: 0 auto;
+  padding-left: $container-padding;
+  padding-right: $container-padding;
+
+  @include mediaquery--md() {
+    width: $container-width-md;
+  }
+  
+  @include mediaquery--sm() {
+    width: $container-width-sm;
+  }
+}
+
+.container-full {
+  width: 100%;
+}

@@ -1,0 +1,42 @@
+@mixin flexCenter($direction: row, $justify-content: space-between, $align-items: center) {
+  display: flex;
+  justify-content: $justify-content;
+  flex-direction: $direction;
+  align-items: $align-items;
+}
+
+@mixin locationCenter($horizontal: 50%, $vertical: 50%) {
+  position: absolute;
+  top: $vertical;
+  left: $horizontal;
+  transform: translate(-$horizontal, -$vertical);
+}
+
+@mixin centerX($horizontal: 50%) {
+  position: absolute;
+  left: $horizontal;
+  transform: translateX(-$horizontal);
+}
+
+@mixin centerY($horizontal: 50%) {
+  position: absolute;
+  top: $horizontal;
+  transform: translateY(-$horizontal);
+}
+
+@mixin excerpt($lines: 3) {
+  -webkit-line-clamp: $lines;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin bgImage($width, $height) {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: $height;
+  min-width: $width;
+}

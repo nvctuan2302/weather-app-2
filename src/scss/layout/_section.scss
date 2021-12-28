@@ -1,0 +1,39 @@
+.section {
+
+
+  &--xl {
+    > [class^="container"] {
+      padding-bottom: 60px;
+    }
+  }
+
+  &--sm {
+    > [class^="container"] {
+      padding-bottom: 32px;
+    }
+  }
+
+  &--white {
+    background-color: $color-white;
+  }
+
+  &--grey {
+    background-color: $color-snow;
+  }
+}
+
+.section-balance {
+  &--xl {
+    > [class^="container"] {
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+  }
+
+  &--md {
+    > [class^="container"] {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+  }
+}

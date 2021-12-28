@@ -1,0 +1,47 @@
+[class*="headline"] {
+  line-height: 1;
+}
+
+.headline {
+  &--main {
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  &--sub {
+    letter-spacing: 3px;
+    font-style: italic;
+  }
+
+  &--lg {
+    font-size: $font-size-xxxl;
+  }
+
+  &--xl {
+    font-size: $font-size-xxl;
+  }
+
+  &--md {
+    font-size: $font-size-xl;
+  }
+
+  &--sm {
+    font-size: $font-size-lgg; //20
+  }
+
+  &--xs {
+    font-size: $font-size-sm;
+  }
+
+  &--white {
+    color: $color-white;
+  }
+
+  &--dark {
+    color: $color-cinder;
+  }
+
+  &--grey {
+    color: $color-light-grey;
+  }
+}

@@ -1,0 +1,7 @@
+.main {
+  padding-top: 50px;
+
+  @include mediaquery--not-lg() {
+    padding-top: 0px;
+  }
+}

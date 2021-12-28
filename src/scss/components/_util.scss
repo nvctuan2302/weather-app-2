@@ -1,0 +1,97 @@
+@for $i from 0 through 80 {
+  .u-mr-#{$i} {
+    margin-right: #{$i}px;
+  }
+
+  .u-ml-#{$i} {
+    margin-left: #{$i}px;
+  }
+
+  .u-mbt-#{$i} {
+    margin-bottom: #{$i}px;
+  }
+
+  .u-mt-#{$i} {
+    margin-top: #{$i}px;
+  }
+
+  .u-pr-#{$i} {
+    padding-right: #{$i}px;
+  }
+
+  .u-pl-#{$i} {
+    padding-left: #{$i}px;
+  }
+
+  .u-pbt-#{$i} {
+    padding-bottom: #{$i}px;
+  }
+
+  .u-pt-#{$i} {
+    padding-top: #{$i}px;
+  }
+
+  .u-fontsize-#{$i} {
+    font-size: #{$i}px;
+  }
+}
+
+.u-pos-relative {
+  position: relative;
+}
+
+.u-overflow-hiden {
+  overflow: hidden;
+}
+
+.u-color-primary {
+  color: $color-charm;
+}
+
+.u-color-white {
+  color: $color-white;
+}
+
+.u-color-grey {
+  color: $color-nobel;
+}
+
+.u-bg-white {
+  background-color: $color-white;
+}
+
+.u-bg-transparent {
+  background-color: transparent !important;
+}
+
+.u-text-center {
+  text-align: center;
+}
+
+.u-line {
+  margin: 0;
+  border: 1px solid $color-mid-gray;
+}
+
+.u-flex-center {
+  @include flexCenter();
+  overflow: auto;
+}
+
+.u-hiden {
+  display: none;
+}
+
+.u-show {
+  display: block;
+}
+
+@keyframes syncRotate {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
