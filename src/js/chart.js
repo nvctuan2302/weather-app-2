@@ -1,9 +1,10 @@
 import Chart from "chart.js";
 
 export const chart = () => {
+
   const ctx = document.getElementById("myChart");
   const myChart = new Chart(ctx, {
-    type: "bar",
+    type: "line",
     data: {
       labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
       datasets: [

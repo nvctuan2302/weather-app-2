@@ -8,7 +8,7 @@
   @include mediaquery--md() {
     width: $container-width-md;
   }
-  
+
   @include mediaquery--sm() {
     width: $container-width-sm;
   }

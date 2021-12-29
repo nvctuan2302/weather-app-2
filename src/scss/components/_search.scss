@@ -1,0 +1,22 @@
+.search {
+  display: flex;
+  justify-content: flex-end;
+  padding: 30px 0;
+  margin-bottom: 30px;
+
+  &__content {
+    width: 40%;
+    padding: 10px 0 10px 20px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  &__btn {
+    cursor: pointer;
+    background-color: $color-charm;
+    color: $color-gainsboro;
+    padding: 10px 20px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+}

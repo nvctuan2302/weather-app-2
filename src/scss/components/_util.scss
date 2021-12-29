@@ -73,8 +73,13 @@
   border: 1px solid $color-mid-gray;
 }
 
-.u-flex-center {
-  @include flexCenter();
+.u-flex-left {
+  @include flexCenter($justify-content: flex-start);
+  overflow: auto;
+}
+
+.u-flex-right {
+  @include flexCenter($justify-content: flex-end);
   overflow: auto;
 }
 
@@ -84,6 +89,10 @@
 
 .u-show {
   display: block;
+}
+
+.u-bold {
+  font-weight: $font-weight-dark-bold;
 }
 
 @keyframes syncRotate {

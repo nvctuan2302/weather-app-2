@@ -1,6 +1,123 @@
 {% extends 'layout/_main.html' %}
 {% block content %}
-<section class="main">
-  <canvas id="myChart" width="400" height="400"></canvas>
-</section>
+<main class="main">
+  <section class="section--grey">
+    <div class="container">
+      <div class="search">
+        <input class="search__content" type="text" placeholder="Search city" />
+        <button class="search__btn">Search</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--sm">
+    <div class="container">
+      <div class="row">
+        <div class="col-5">
+          <span class="weather-current__time">Dec 29, 10:00am</span>
+          <h2 class="weather-current__name">Thủ Đức, VN</h2>
+          <div class="u-flex-left">
+            <div class="weather-current__icon" style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+            <div class="weather-current__temp">28</div>
+          </div>
+          <div class="u-bold u-mbt-10">
+            <span class="weather-current__feels">Feels like 31</span>.
+            <span class="weather-current__desc">broken clouds</span>
+          </div>
+          <div class="weather-current__expand">
+            <ul class="expand-list">
+              <li class="expand-list__item">1.5m/s N</li>
+              <li class="expand-list__item">1014h Pa</li>
+              <li class="expand-list__item">Humidity: 74%</li>
+              <li class="expand-list__item">UV: 7</li>
+              <li class="expand-list__item">Dew point: 23°C</li>
+              <li class="expand-list__item">Visibility: 10.0km</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-7">
+          <img class="weather-current__map" src="https://www.google.com/maps/vt/data=tkh-97pYcdJ5PjebSBMnqDlRBre8LMZV-yzaj3lmGsM8wXEy8jFpZKZkG7L8Eqy7Z9tnu5Q4QtJg6lUjCgwRRcMk5GctOwkZA2B7AVw9gTB53IO4HNhv2XokS7xPfFcjDVh18D1IXvZB7el-EA_URTBydXsIF5IfgjepZYzCGsKr4iLTEOdMshPbQMnCIMOvWhYkPN2eusvc-5Tj6NcrN60UHtEODNi72PraOIZcNMsjc6TXwU6C" style="border:0" title="Bản đồ của Thủ Đức, Thành phố Hồ Chí Minh" alt="Bản đồ của Thủ Đức, Thành phố Hồ Chí Minh" data-atf="1" data-frt="0">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--sm">
+    <div class="container">
+      <div class="row">
+        <div class="col-7">
+          <h3 class="u-bold u-fontsize-20">Hourly forecast</h3>
+          <canvas id="myChart" height="180"></canvas>
+        </div>
+        <div class="col-5">
+          <h3 class="u-bold u-fontsize-20">Daily forecast</h3>
+          <div class="weather-forecast__daily">
+            <ul class="daily-list">
+              <li class="daily-list__item">
+                <div class="daily-list__time">Wed, Dec 29</div>
+                <div class="u-flex-left">
+                  <div class="daily-list__icon" style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                  <div class="daily-list__temp">30 / 23°C</div>
+                </div>
+                <div class="daily-list__desc">light rain</div>
+              </li>
+              <li class="daily-list__item">
+                <div class="daily-list__time">Wed, Dec 29</div>
+                <div class="u-flex-left">
+                  <div class="daily-list__icon" style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                  <div class="daily-list__temp">30 / 23°C</div>
+                </div>
+                <div class="daily-list__desc">light rain </div>
+              </li>
+              <li class="daily-list__item">
+                <div class="daily-list__time">Wed, Dec 29</div>
+                <div class="u-flex-left">
+                  <div class="daily-list__icon" style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                  <div class="daily-list__temp">30 / 23°C</div>
+                </div>
+                <div class="daily-list__desc">light rain</div>
+              </li>
+              <li class="daily-list__item">
+                <div class="daily-list__time">Wed, Dec 29</div>
+                <div class="u-flex-left">
+                  <div class="daily-list__icon" style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                  <div class="daily-list__temp">30 / 23°C</div>
+                </div>
+                <div class="daily-list__desc">light rain</div>
+              </li>
+              <li class="daily-list__item">
+                <div class="daily-list__time">Wed, Dec 29</div>
+                <div class="u-flex-left">
+                  <div class="daily-list__icon" style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                  <div class="daily-list__temp">30 / 23°C</div>
+                </div>
+                <div class="daily-list__desc">light rain</div>
+              </li>
+              <li class="daily-list__item">
+                <div class="daily-list__time">Wed, Dec 29</div>
+                <div class="u-flex-left">
+                  <div class="daily-list__icon" style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                  <div class="daily-list__temp">30 / 23°C</div>
+                </div>
+                <div class="daily-list__desc">light rain</div>
+              </li>
+              <li class="daily-list__item">
+                <div class="daily-list__time">Wed, Dec 29</div>
+                <div class="u-flex-left">
+                  <div class="daily-list__icon" style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                  <div class="daily-list__temp">30 / 23°C</div>
+                </div>
+                <div class="daily-list__desc">light rain</div>
+              </li>
+
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
 {% endblock %}

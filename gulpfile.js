@@ -15,10 +15,6 @@ var clean = require("gulp-clean");
 var runSequence = require("run-sequence");
 var plumber = require("gulp-plumber");
 
-gulp.task("test", () => {
-  console.log(chart);
-});
-
 var init = {
   srcPath: "./src",
   destPath: "./public",
@@ -28,7 +24,6 @@ gulp.task("html", () => {
   gulp
     .src([
       `${init.srcPath}/html/**/*.html`,
-      `!${init.srcPath}/html/shared/*`,
       `!${init.srcPath}/html/layout/*`,
     ])
     .pipe(

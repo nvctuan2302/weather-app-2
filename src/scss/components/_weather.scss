@@ -1,0 +1,104 @@
+.weather-current {
+  &__time {
+    display: inline-block;
+    color: $color-charm;
+    margin-bottom: 8px;
+  }
+
+  &__name {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-dark-bold;
+    padding-bottom: 30px;
+  }
+
+  &__icon {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    margin-left: -7px;
+  }
+
+  &__temp,
+  &__feels {
+    display: inline-block;
+
+    &:after {
+      content: "\2103";
+    }
+  }
+
+  &__temp {
+    font-size: $font-size-xxxl;
+  }
+
+  &__map {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__desc {
+    text-transform: capitalize;
+  }
+
+  &__expand {
+    border-left: 1px solid $color-charm;
+
+    .expand-list {
+      padding: 0 30px;
+      line-height: 1.5;
+
+      &__item {
+        display: inline-block;
+      }
+
+      &__item:nth-child(odd) {
+        margin-right: 30px;
+      }
+
+      &__item:nth-child(even) {
+        margin-right: 50px;
+      }
+    }
+  }
+}
+
+.weather-forecast {
+  &__chart {
+  }
+
+  &__daily {
+    margin-top: 14px;
+
+    .daily-list {
+
+      &__item {
+        @include flexCenter();
+
+        cursor: pointer;
+        padding: 0 5px;
+        height: 40px;
+        transition: .3s all;
+
+        &:hover {
+          background-color: lightgray;
+          border-radius: 5px;
+        }
+
+      }
+
+      &__time {
+
+      }
+
+      &__icon {
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+      }
+    }
+  }
+}

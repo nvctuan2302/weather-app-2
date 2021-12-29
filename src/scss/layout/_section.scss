@@ -1,6 +1,4 @@
 .section {
-
-
   &--xl {
     > [class^="container"] {
       padding-bottom: 60px;
@@ -18,7 +16,7 @@
   }
 
   &--grey {
-    background-color: $color-snow;
+    background-color:$color-light-gray;
   }
 }
 
@@ -32,8 +30,8 @@
 
   &--md {
     > [class^="container"] {
-      padding-top: 40px;
-      padding-bottom: 40px;
+      padding-top: 10px;
+      padding-bottom: 30px;
     }
   }
 }
