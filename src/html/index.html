@@ -4,7 +4,7 @@
   <section class="section--grey">
     <div class="container">
       <div class="search">
-        <input class="search__content" type="text" placeholder="Search city" />
+        <input class="search__input" type="text" placeholder="Search city" />
         <button class="search__btn">Search</button>
       </div>
     </div>
@@ -14,15 +14,20 @@
     <div class="container">
       <div class="row">
         <div class="col-5">
-          <span class="weather-current__time">Dec 29, 10:00am</span>
-          <h2 class="weather-current__name">Thủ Đức, VN</h2>
+          <span class="weather-current__time js-weather-current__time">?????</span>
+          <h2 class="weather-current__name js-weather-current__name">???, ??</h2>
+
           <div class="u-flex-left">
-            <div class="weather-current__icon" style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
-            <div class="weather-current__temp">28</div>
+            <div class="weather-current__icon js-weather-current__icon"
+              style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+            <div class="weather-current__temp js-weather-current__temp">??</div>
+            <div class="weather-current__redo js-weather-current__redo">
+              <i class="fas fa-redo-alt"></i>
+            </div>
           </div>
           <div class="u-bold u-mbt-10">
-            <span class="weather-current__feels">Feels like 31</span>.
-            <span class="weather-current__desc">broken clouds</span>
+            <span>Cảm giác như <span class="weather-current__feels js-weather-current__feels">??</span>.</span>
+            <span class="weather-current__desc js-weather-current__desc">???????</span>
           </div>
           <div class="weather-current__expand">
             <ul class="expand-list">
@@ -36,7 +41,10 @@
           </div>
         </div>
         <div class="col-7">
-          <img class="weather-current__map" src="https://www.google.com/maps/vt/data=tkh-97pYcdJ5PjebSBMnqDlRBre8LMZV-yzaj3lmGsM8wXEy8jFpZKZkG7L8Eqy7Z9tnu5Q4QtJg6lUjCgwRRcMk5GctOwkZA2B7AVw9gTB53IO4HNhv2XokS7xPfFcjDVh18D1IXvZB7el-EA_URTBydXsIF5IfgjepZYzCGsKr4iLTEOdMshPbQMnCIMOvWhYkPN2eusvc-5Tj6NcrN60UHtEODNi72PraOIZcNMsjc6TXwU6C" style="border:0" title="Bản đồ của Thủ Đức, Thành phố Hồ Chí Minh" alt="Bản đồ của Thủ Đức, Thành phố Hồ Chí Minh" data-atf="1" data-frt="0">
+          <img class="weather-current__map"
+            src="https://www.google.com/maps/vt/data=tkh-97pYcdJ5PjebSBMnqDlRBre8LMZV-yzaj3lmGsM8wXEy8jFpZKZkG7L8Eqy7Z9tnu5Q4QtJg6lUjCgwRRcMk5GctOwkZA2B7AVw9gTB53IO4HNhv2XokS7xPfFcjDVh18D1IXvZB7el-EA_URTBydXsIF5IfgjepZYzCGsKr4iLTEOdMshPbQMnCIMOvWhYkPN2eusvc-5Tj6NcrN60UHtEODNi72PraOIZcNMsjc6TXwU6C"
+            style="border:0" title="Bản đồ của Thủ Đức, Thành phố Hồ Chí Minh"
+            alt="Bản đồ của Thủ Đức, Thành phố Hồ Chí Minh" data-atf="1" data-frt="0">
         </div>
       </div>
     </div>
@@ -56,7 +64,8 @@
               <li class="daily-list__item">
                 <div class="daily-list__time">Wed, Dec 29</div>
                 <div class="u-flex-left">
-                  <div class="daily-list__icon" style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                  <div class="daily-list__icon"
+                    style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
                   <div class="daily-list__temp">30 / 23°C</div>
                 </div>
                 <div class="daily-list__desc">light rain</div>
@@ -64,7 +73,8 @@
               <li class="daily-list__item">
                 <div class="daily-list__time">Wed, Dec 29</div>
                 <div class="u-flex-left">
-                  <div class="daily-list__icon" style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                  <div class="daily-list__icon"
+                    style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
                   <div class="daily-list__temp">30 / 23°C</div>
                 </div>
                 <div class="daily-list__desc">light rain </div>
@@ -72,7 +82,8 @@
               <li class="daily-list__item">
                 <div class="daily-list__time">Wed, Dec 29</div>
                 <div class="u-flex-left">
-                  <div class="daily-list__icon" style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                  <div class="daily-list__icon"
+                    style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
                   <div class="daily-list__temp">30 / 23°C</div>
                 </div>
                 <div class="daily-list__desc">light rain</div>
@@ -80,7 +91,8 @@
               <li class="daily-list__item">
                 <div class="daily-list__time">Wed, Dec 29</div>
                 <div class="u-flex-left">
-                  <div class="daily-list__icon" style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                  <div class="daily-list__icon"
+                    style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
                   <div class="daily-list__temp">30 / 23°C</div>
                 </div>
                 <div class="daily-list__desc">light rain</div>
@@ -88,7 +100,8 @@
               <li class="daily-list__item">
                 <div class="daily-list__time">Wed, Dec 29</div>
                 <div class="u-flex-left">
-                  <div class="daily-list__icon" style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                  <div class="daily-list__icon"
+                    style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
                   <div class="daily-list__temp">30 / 23°C</div>
                 </div>
                 <div class="daily-list__desc">light rain</div>
@@ -96,7 +109,8 @@
               <li class="daily-list__item">
                 <div class="daily-list__time">Wed, Dec 29</div>
                 <div class="u-flex-left">
-                  <div class="daily-list__icon" style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                  <div class="daily-list__icon"
+                    style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
                   <div class="daily-list__temp">30 / 23°C</div>
                 </div>
                 <div class="daily-list__desc">light rain</div>
@@ -104,7 +118,8 @@
               <li class="daily-list__item">
                 <div class="daily-list__time">Wed, Dec 29</div>
                 <div class="u-flex-left">
-                  <div class="daily-list__icon" style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                  <div class="daily-list__icon"
+                    style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
                   <div class="daily-list__temp">30 / 23°C</div>
                 </div>
                 <div class="daily-list__desc">light rain</div>
