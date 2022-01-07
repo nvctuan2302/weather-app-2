@@ -5,7 +5,10 @@ const tempCurrentWeather = document.querySelector(".js-weather-current__temp");
 const feelsCurrentWeather = document.querySelector(".js-weather-current__feels");
 const iconCurrentWeather = document.querySelector(".js-weather-current__icon");
 const refreshCurrentWeather = document.querySelector(".js-weather-current__redo");
+const getSearchInput = document.querySelector(".js-search__input");
 let timeCurrentWeather = document.querySelector(".js-weather-current__time");
+
+
 
 const api = {
   key: "2f887e5d1ea0b70b225c193184f78cd2",
@@ -48,7 +51,7 @@ const fetchApi = (url) => {
     .then(status)
     .then(displayWeatherCurrent)
     .catch((error) => {
-      alert("OKe");
+      alert("Khồng tìm thấy thành phố !!!!");
     });
 };
 
@@ -62,10 +65,15 @@ const getResults = (query) => {
   fetchApi(`${api.baseUrl}weather?q=${query}&units=metric&appid=${api.key}&lang=vi`);
 };
 
-
-
 export const weather = _ => {
   navigator.geolocation.getCurrentPosition(getCurrentPosition);
+
+  getSearchInput.addEventListener("keypress", (e) => {
+    if (e.keyCode === 13 && e.target.value !== "") {
+      getResults(e.target.value);
+      e.target.value = "";
+    }
+  });
 
   refreshCurrentWeather.addEventListener("click", _ => {
     getResults(nameCity.innerText);
