@@ -62,10 +62,12 @@ const getResults = (query) => {
   fetchApi(`${api.baseUrl}weather?q=${query}&units=metric&appid=${api.key}&lang=vi`);
 };
 
-refreshCurrentWeather.addEventListener("click", _ => {
 
-});
 
 export const weather = _ => {
   navigator.geolocation.getCurrentPosition(getCurrentPosition);
+
+  refreshCurrentWeather.addEventListener("click", _ => {
+    getResults(nameCity.innerText);
+  })
 };
