@@ -42,6 +42,11 @@
     text-transform: capitalize;
   }
 
+  &__redo {
+    cursor: pointer;
+    margin-left: 20px;
+  }
+
   &__expand {
     border-left: 1px solid $color-charm;
 
@@ -72,24 +77,21 @@
     margin-top: 14px;
 
     .daily-list {
-
       &__item {
         @include flexCenter();
 
         cursor: pointer;
         padding: 0 5px;
         height: 40px;
-        transition: .3s all;
+        transition: 0.3s all;
 
         &:hover {
           background-color: lightgray;
           border-radius: 5px;
         }
-
       }
 
       &__time {
-
       }
 
       &__icon {
