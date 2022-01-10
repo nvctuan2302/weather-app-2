@@ -6,6 +6,7 @@ const feelsCurrentWeather = document.querySelector(".js-weather-current__feels")
 const iconCurrentWeather = document.querySelector(".js-weather-current__icon");
 const refreshCurrentWeather = document.querySelector(".js-weather-current__redo");
 const getSearchInput = document.querySelector(".js-search__input");
+const getSearchBtn = document.querySelector(".js-search__btn");
 let timeCurrentWeather = document.querySelector(".js-weather-current__time");
 
 
@@ -68,12 +69,19 @@ const getResults = (query) => {
 export const weather = _ => {
   navigator.geolocation.getCurrentPosition(getCurrentPosition);
 
-  getSearchInput.addEventListener("keypress", (e) => {
+  getSearchInput.addEventListener("keypress", e => {
     if (e.keyCode === 13 && e.target.value !== "") {
       getResults(e.target.value);
       e.target.value = "";
     }
   });
+
+  getSearchBtn.addEventListener("click", e => {
+    if (getSearchInput.value !== "") {
+      getResults(getSearchInput.value)
+      getSearchInput.value = "";
+    }
+  })
 
   refreshCurrentWeather.addEventListener("click", _ => {
     getResults(nameCity.innerText);
