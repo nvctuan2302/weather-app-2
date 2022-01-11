@@ -14,12 +14,18 @@ const pressureCurrentWeather = document.querySelector(".js-expand-list__pressure
 const windCurrentWeather = document.querySelector(".js-expand-list__wind");
 const uviCurrentWeather = document.querySelector(".js-expand-list__uvi");
 const dewpointCurrentWeather = document.querySelector(".js-expand-list__dewpoint");
+
+// display daily forecast
+const arrDescDailyForecast = [...document.querySelectorAll(".js-daily-list__desc")];
+const arrIconDailyForecast = [...document.querySelectorAll(".js-daily-list__icon")];
+const arrTempDailyForecast = [...document.querySelectorAll(".js-daily-list__temp")];
+const arrTimeDailyForecast = [...document.querySelectorAll(".js-daily-list__time")];
+
+
 const api = {
   key: "2f887e5d1ea0b70b225c193184f78cd2",
   baseUrl: "https://api.openweathermap.org/data/2.5/",
 };
-let timeCurrentWeather = document.querySelector(".js-weather-current__time");
-
 
 const displayWeatherCurrent = data => {
   const { description, icon } = data.current.weather[0];
@@ -42,44 +48,59 @@ const displayWeatherCurrent = data => {
   windCurrentWeather.innerText = wind_speed;
   visibilityCurrentWeather.innerText = (visibility / 1000);
   iconCurrentWeather.style.backgroundImage = `url('http://openweathermap.org/img/wn/${icon}@4x.png')`;
+
+  return data;
 };
 
-const status = (response) => {
-  if ((response.status >= 200 && response.status < 300) || response.status === 404) {
-    return response.json();
+
+function timeConverter(UNIX_timestamp){
+  let a = new Date(UNIX_timestamp * 1000);
+  let arrDay = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+  let day = a.getDay();
+  let month = a.getMonth() + 1;
+  let date = a.getDate();
+  let time = arrDay[day]+ ' ' + date + ' / ' + month ;
+
+  return time
+}
+
+const displayDailyForecast = data => {
+  for (let index = 0; index < data.daily.length; index++) {
+    const { description, icon } = data.daily[index].weather[0];
+    const { min,
+            max } = data.daily[index].temp;
+
+    arrDescDailyForecast[index].innerText = description; // get description
+    arrIconDailyForecast[index].style.backgroundImage = `url('http://openweathermap.org/img/wn/${icon}@4x.png')`; // get icon
+    arrTempDailyForecast[index].innerText = `${Math.round(min)} / ${Math.round(max)}`;
+    arrTimeDailyForecast[index].innerText = (timeConverter(data.daily[index].dt))
   }
+
+
+}
+
+const status = response => {
+  // if ((response.status >= 200 && response.status < 300) || response.status === 404) {
+  return response.json();
+  // }
 };
 
 const error = error => {
-  alert(`Không tìm thấy thành phố !!!!`, error);
+  alert(`Không tìm thấy thành phố !!!!`);
 }
-
 
 const getData = url => {
   fetch(`${url}`)
     .then(status)
     .then(data => {
-      nameCity.innerText = `${data.name},${data.sys.country}`;
+      nameCity.innerText = `${data.name},  ${data.sys.country}`;
 
       fetch(`${api.baseUrl}onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=minutely,alerts&units=metric&appid=${api.key}&lang=vi`)
         .then(status)
         .then(displayWeatherCurrent)
+        .then(displayDailyForecast)
     }).catch(error)
-
-
 }
-
-setInterval((_) => {
-  let date = new Date();
-
-  let day = `${date.getDate()}`;
-  let month = `${date.getMonth()}` + 1;
-  let hours = `${date.getHours()}`;
-  let minutes = `0${date.getMinutes()}`;
-  let seconds = `0${date.getSeconds()}`;
-  timeCurrentWeather.innerText = `T2 ${day}/${month} ${hours}:${minutes.substr(-2)}:${seconds.substr(-2)}`;
-}, 1000);
-
 
 const getCurrentPosition = (position) => {
   const { latitude, longitude } = position.coords;
@@ -90,6 +111,7 @@ const getCurrentPosition = (position) => {
 const getResults = (query) => {
   getData(`${api.baseUrl}weather?q=${query}&units=metric&appid=${api.key}&lang=vi`);
 };
+
 export const weather = _ => {
   navigator.geolocation.getCurrentPosition(getCurrentPosition);
 
