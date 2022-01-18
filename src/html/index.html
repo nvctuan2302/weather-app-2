@@ -29,7 +29,7 @@
             <span>Cảm giác như <span class="weather-current__feels js-weather-current__feels">??</span>.</span>
             <span class="weather-current__desc js-weather-current__desc">???????</span>
           </div>
-          <div class="weather-current__expand">
+          <div class="weather-expand">
             <ul class="expand-list">
               <li class="expand-list__item">Tốc độ gió:
                 <span class="js-expand-list__wind">???</span> m/s
@@ -67,93 +67,184 @@
       <div class="row">
         <div class="col-6">
           <h3 class="u-bold u-fontsize-20">Hourly forecast</h3>
-          <canvas id="myChart" height="180"></canvas>
+          <canvas id="myChart" height="227"></canvas>
         </div>
         <div class="col-6">
           <h3 class="u-bold u-fontsize-20">Dự báo hàng ngày</h3>
           <div class="weather-forecast__daily">
-            <ul class="daily-list js-daily-list">
+            <div class="wrap-list">
+              <ul class="daily-list is-column js-daily-list">
 
-              <li class="daily-list__item js-daily-list__item">
-                <div class="daily-list__time js-daily-list__time">Wed, Dec 29</div>
-                <div class="u-flex-left">
-                  <div class="daily-list__icon js-daily-list__icon"
-                    style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
-                  <div class="daily-list__temp js-daily-list__temp">?? / ??°C</div>°C
-                </div>
-                <div class="daily-list__desc js-daily-list__desc">??? 1</div>
-              </li>
+                <li class="daily-list__item js-daily-list__item">
+                  <div class="daily-list__time js-daily-list__time">Wed, Dec 29</div>
+                  <div class="u-flex-left">
+                    <div class="daily-list__icon js-daily-list__icon"
+                      style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                    <div class="daily-list__temp js-daily-list__temp">?? / ??°C</div>°C
+                  </div>
+                  <div class="daily-list__desc js-daily-list__desc">??? 1</div>
+                </li>
 
-              <li class="daily-list__item js-daily-list__item">
-                <div class="daily-list__time js-daily-list__time">Wed, Dec 29</div>
-                <div class="u-flex-left">
-                  <div class="daily-list__icon js-daily-list__icon"
-                    style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
-                  <div class="daily-list__temp js-daily-list__temp">????</div>°C
-                </div>
-                <div class="daily-list__desc js-daily-list__desc">??? 2</div>
-              </li>
+                <li class="daily-list__item js-daily-list__item">
+                  <div class="daily-list__time js-daily-list__time">Wed, Dec 29</div>
+                  <div class="u-flex-left">
+                    <div class="daily-list__icon js-daily-list__icon"
+                      style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                    <div class="daily-list__temp js-daily-list__temp">????</div>°C
+                  </div>
+                  <div class="daily-list__desc js-daily-list__desc">??? 2</div>
+                </li>
 
-              <li class="daily-list__item js-daily-list__item">
-                <div class="daily-list__time js-daily-list__time">Wed, Dec 29</div>
-                <div class="u-flex-left">
-                  <div class="daily-list__icon js-daily-list__icon"
-                    style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
-                  <div class="daily-list__temp js-daily-list__temp">????</div>°C
-                </div>
-                <div class="daily-list__desc js-daily-list__desc">??? 3</div>
-              </li>
+                <li class="daily-list__item js-daily-list__item">
+                  <div class="daily-list__time js-daily-list__time">Wed, Dec 29</div>
+                  <div class="u-flex-left">
+                    <div class="daily-list__icon js-daily-list__icon"
+                      style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                    <div class="daily-list__temp js-daily-list__temp">????</div>°C
+                  </div>
+                  <div class="daily-list__desc js-daily-list__desc">??? 3</div>
+                </li>
 
-              <li class="daily-list__item js-daily-list__item">
-                <div class="daily-list__time js-daily-list__time">Wed, Dec 29</div>
-                <div class="u-flex-left">
-                  <div class="daily-list__icon js-daily-list__icon"
-                    style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
-                  <div class="daily-list__temp js-daily-list__temp">????</div>°C
-                </div>
-                <div class="daily-list__desc js-daily-list__desc">??? 4</div>
-              </li>
+                <li class="daily-list__item js-daily-list__item">
+                  <div class="daily-list__time js-daily-list__time">Wed, Dec 29</div>
+                  <div class="u-flex-left">
+                    <div class="daily-list__icon js-daily-list__icon"
+                      style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                    <div class="daily-list__temp js-daily-list__temp">????</div>°C
+                  </div>
+                  <div class="daily-list__desc js-daily-list__desc">??? 4</div>
+                </li>
 
-              <li class="daily-list__item js-daily-list__item">
-                <div class="daily-list__time js-daily-list__time">Wed, Dec 29</div>
-                <div class="u-flex-left">
-                  <div class="daily-list__icon js-daily-list__icon"
-                    style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
-                  <div class="daily-list__temp js-daily-list__temp">????</div>°C
-                </div>
-                <div class="daily-list__desc js-daily-list__desc">??? 5</div>
-              </li>
+                <li class="daily-list__item js-daily-list__item">
+                  <div class="daily-list__time js-daily-list__time">Wed, Dec 29</div>
+                  <div class="u-flex-left">
+                    <div class="daily-list__icon js-daily-list__icon"
+                      style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                    <div class="daily-list__temp js-daily-list__temp">????</div>°C
+                  </div>
+                  <div class="daily-list__desc js-daily-list__desc">??? 5</div>
+                </li>
 
-              <li class="daily-list__item js-daily-list__item">
-                <div class="daily-list__time js-daily-list__time">Wed, Dec 29</div>
-                <div class="u-flex-left">
-                  <div class="daily-list__icon js-daily-list__icon"
-                    style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
-                  <div class="daily-list__temp js-daily-list__temp">????</div>°C
-                </div>
-                <div class="daily-list__desc js-daily-list__desc">??? 6</div>
-              </li>
+                <li class="daily-list__item js-daily-list__item">
+                  <div class="daily-list__time js-daily-list__time">Wed, Dec 29</div>
+                  <div class="u-flex-left">
+                    <div class="daily-list__icon js-daily-list__icon"
+                      style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                    <div class="daily-list__temp js-daily-list__temp">????</div>°C
+                  </div>
+                  <div class="daily-list__desc js-daily-list__desc">??? 6</div>
+                </li>
 
-              <li class="daily-list__item js-daily-list__item">
-                <div class="daily-list__time js-daily-list__time">Wed, Dec 29</div>
-                <div class="u-flex-left">
-                  <div class="daily-list__icon js-daily-list__icon"
-                    style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
-                  <div class="daily-list__temp js-daily-list__temp">????</div>°C
-                </div>
-                <div class="daily-list__desc js-daily-list__desc">??? 7</div>
-              </li>
+                <li class="daily-list__item js-daily-list__item">
+                  <div class="daily-list__time js-daily-list__time">Wed, Dec 29</div>
+                  <div class="u-flex-left">
+                    <div class="daily-list__icon js-daily-list__icon"
+                      style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                    <div class="daily-list__temp js-daily-list__temp">????</div>°C
+                  </div>
+                  <div class="daily-list__desc js-daily-list__desc">??? 7</div>
+                </li>
 
-              <li class="daily-list__item js-daily-list__item">
-                <div class="daily-list__time js-daily-list__time">Wed, Dec 29</div>
-                <div class="u-flex-left">
-                  <div class="daily-list__icon js-daily-list__icon"
-                    style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
-                  <div class="daily-list__temp js-daily-list__temp">????</div>°C
+                <li class="daily-list__item js-daily-list__item">
+                  <div class="daily-list__time js-daily-list__time">Wed, Dec 29</div>
+                  <div class="u-flex-left">
+                    <div class="daily-list__icon js-daily-list__icon"
+                      style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                    <div class="daily-list__temp js-daily-list__temp">????</div>°C
+                  </div>
+                  <div class="daily-list__desc js-daily-list__desc">??? 8</div>
+                </li>
+
+              </ul>
+            </div>
+
+            <div class="daily-detail js-daily-detail">
+              <div class="daily-detail__header js-daily-detail__header">
+                <ul class="daily-list is-row">
+                  <li class="daily-list__item js-daily-list__item">??? </li>
+                  <li class="daily-list__item js-daily-list__item">Wed, Dec 29</li>
+                  <li class="daily-list__item js-daily-list__item">Wed, Dec 29</li>
+                  <li class="daily-list__item js-daily-list__item">Wed, Dec 29</li>
+                  <li class="daily-list__item js-daily-list__item">Wed, Dec 29</li>
+                  <li class="daily-list__item js-daily-list__item">Wed, Dec 29</li>
+                  <li class="daily-list__item js-daily-list__item">Wed, Dec 29</li>
+                  <li class="daily-list__item js-daily-list__item">Wed, Dec 29</li>
+                </ul>
+                <div class="close" style="width: 50px;height: 50px;">
+                  <i class="far fa-times-circle js-close"></i>
                 </div>
-                <div class="daily-list__desc js-daily-list__desc">??? 8</div>
-              </li>
-            </ul>
+              </div>
+              <div class="daily-detail__body">
+
+                <div class="detail-main">
+                  <div class="detail-main__icon js-detail-main__icon"
+                    style="background-image: url(http://openweathermap.org/img/wn/04d@4x.png)"></div>
+                  <div class="u-ml-10">
+                    <p class="detail-main__desc js-detail-main__desc">???</p>
+                    <p>
+                      Nhiệt độ cao nhất <span class="js-detail-main__max">???</span>°C,
+                      Nhiệt độ thấp nhất <span class="js-detail-main__min">???</span>°C.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="weather-expand">
+                  <ul class="expand-list">
+                    <li class="expand-list__item">Tốc độ gió:
+                      <span class="js-expand-list__wind">???</span> m/s
+                    </li>
+                    <li class="expand-list__item">
+                      Áp suất: <span class="js-expand-list__pressure">???</span> Pa
+                    </li>
+                    <li class="expand-list__item">
+                      Độ ẩm: <span class="js-expand-list__humidity">???</span>%
+                    </li>
+                    <li class="expand-list__item">
+                      Tia UVI: <span class="js-expand-list__uvi">???</span>
+                    </li>
+                    <li class="expand-list__item">
+                      Điểm sương: <span class="js-expand-list__dewpoint">???</span>%
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="detail-temp">
+                  <div class="detail-temp__item">
+                    <div class="u-pt-10">Nhiệt độ</div>
+                    <div class="u-pt-10">Cảm giác như</div>
+                  </div>
+                  <div class="detail-temp__item">SÁNG
+                    <span class="u-pt-10 js-detail-temp__morn">??°C</span>
+                    <div class="u-pt-10 js-detail-temp__morn-feel">??°C</div>
+                  </div>
+                  <div class="detail-temp__item">TRƯA
+                    <div class="u-pt-10 js-detail-temp__day">??°C</div>
+                    <div class="u-pt-10 js-detail-temp__day-feel">??°C</div>
+                  </div>
+                  <div class="detail-temp__item">CHIỀU
+                    <div class="u-pt-10 js-detail-temp__eve">??°C</div>
+                    <div class="u-pt-10 js-detail-temp__eve-feel">??°C</div>
+                  </div>
+                  <div class="detail-temp__item">TỐI
+                    <div class="u-pt-10 js-detail-temp__night">??°C</div>
+                    <div class="u-pt-10 js-detail-temp__night-feel">??°C</div>
+                  </div>
+                </div>
+
+                <div class="detail-suntime">
+                  <div class="detail-suntime__item">
+                    <span class="u-mbt-5">BÌNH MÌNH</span>
+                    <span class="js-detail-suntime__sunrise">????</span>
+                  </div>
+                  <div class="detail-suntime__item">
+                    <span class="u-mbt-5">HOÀNG HÔN</span>
+                    <span class="js-detail-suntime__sunset">????</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

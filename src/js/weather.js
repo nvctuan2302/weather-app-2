@@ -1,4 +1,4 @@
-import { data } from "browserslist";
+import * as util from './util'
 
 const nameCity = document.querySelector(".js-weather-current__name");
 const descriptionWeather = document.querySelector(".js-weather-current__desc");
@@ -21,6 +21,32 @@ const arrIconDailyForecast = [...document.querySelectorAll(".js-daily-list__icon
 const arrTempDailyForecast = [...document.querySelectorAll(".js-daily-list__temp")];
 const arrTimeDailyForecast = [...document.querySelectorAll(".js-daily-list__time")];
 
+const arrDailyForecast = [...document.querySelectorAll(".wrap-list .js-daily-list__item")];
+
+const dewpointDailyDetail = document.querySelector(".daily-detail__body .js-expand-list__dewpoint");
+const uviDailyDetail = document.querySelector(".daily-detail__body .js-expand-list__uvi");
+const windDailyDetail = document.querySelector(".daily-detail__body .js-expand-list__wind");
+const pressureDailyDetail = document.querySelector(".daily-detail__body .js-expand-list__pressure");
+const humidityDailyDetail = document.querySelector(".daily-detail__body .js-expand-list__humidity");
+
+const arrTimeDetailMain = [...document.querySelectorAll(".js-daily-detail__header .js-daily-list__item")];
+
+
+const descDetailMain = document.querySelector(".js-detail-main__desc");
+const minDetailMain = document.querySelector(".js-detail-main__min");
+const maxDetailMain = document.querySelector(".js-detail-main__max");
+const iconDetailMain = document.querySelector(".js-detail-main__icon");
+const mornDetailMain = document.querySelector(".js-detail-temp__morn");
+const mornfeelDetailMain = document.querySelector(".js-detail-temp__morn-feel");
+const dayDetailMain = document.querySelector(".js-detail-temp__day");
+const dayfeelDetailMain = document.querySelector(".js-detail-temp__day-feel");
+const eveDetailMain = document.querySelector(".js-detail-temp__eve");
+const evefeelDetailMain = document.querySelector(".js-detail-temp__eve-feel");
+const nightDetailMain = document.querySelector(".js-detail-temp__night");
+const nightfeelDetailMain = document.querySelector(".js-detail-temp__night-feel");
+const sunsetDetailMain = document.querySelector(".js-detail-suntime__sunset");
+const sunriseDetailMain = document.querySelector(".js-detail-suntime__sunrise");
+
 
 const api = {
   key: "2f887e5d1ea0b70b225c193184f78cd2",
@@ -29,14 +55,16 @@ const api = {
 
 const displayWeatherCurrent = data => {
   const { description, icon } = data.current.weather[0];
-  const { temp,
+  const {
+    temp,
     feels_like,
     humidity,
     pressure,
     wind_speed,
     visibility,
     uvi,
-    dew_point } = data.current;
+    dew_point
+  } = data.current;
 
   descriptionWeather.innerText = description;
   tempCurrentWeather.innerText = Math.round(temp);
@@ -53,30 +81,110 @@ const displayWeatherCurrent = data => {
 };
 
 
-function timeConverter(UNIX_timestamp){
-  let a = new Date(UNIX_timestamp * 1000);
+function dayConverter(UNIX_timestamp) {
+  let time = new Date(UNIX_timestamp * 1000);
   let arrDay = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
-  let day = a.getDay();
-  let month = a.getMonth() + 1;
-  let date = a.getDate();
-  let time = arrDay[day]+ ' ' + date + ' / ' + month ;
+  let day = time.getDay();
+  let month = time.getMonth() + 1;
+  let date = time.getDate();
 
-  return time
+  return `${arrDay[day]} ${date} / ${month}`
+}
+
+function timeConverter(UNIX_timestamp, timezone) {
+  let times = new Date(UNIX_timestamp * 1000);
+  let timeConverter = new Date(times.toLocaleString('en-US', { timeZone: timezone }));
+  let hours = timeConverter.getHours();
+  let min = times.getMinutes();
+
+  return `${hours}:${min}`;
 }
 
 const displayDailyForecast = data => {
-  for (let index = 0; index < data.daily.length; index++) {
-    const { description, icon } = data.daily[index].weather[0];
-    const { min,
-            max } = data.daily[index].temp;
 
-    arrDescDailyForecast[index].innerText = description; // get description
-    arrIconDailyForecast[index].style.backgroundImage = `url('http://openweathermap.org/img/wn/${icon}@4x.png')`; // get icon
-    arrTempDailyForecast[index].innerText = `${Math.round(min)} / ${Math.round(max)}`;
-    arrTimeDailyForecast[index].innerText = (timeConverter(data.daily[index].dt))
+  const arrDaily = data.daily.map((data, index) => {
+    arrDescDailyForecast[index].innerText = data.weather[0].description;
+    arrIconDailyForecast[index].style.backgroundImage =
+      `url('http://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png')`;
+    arrTempDailyForecast[index].innerText = `${Math.round(data.temp.min)} / ${Math.round(data.temp.max)}`;
+    arrTimeDailyForecast[index].innerText = (dayConverter(data.dt));
+    arrTimeDetailMain[index].innerText = (dayConverter(data.dt));
+
+    return data;
+  });
+
+  const displayDailyDetai = index => {
+    const { description, icon } = arrDaily[index].weather[0];
+
+    const {
+      humidity,
+      pressure,
+      wind_speed,
+      uvi,
+      dew_point,
+      sunrise,
+      sunset
+    } = arrDaily[index];
+
+    const {
+      min,
+      max,
+      day,
+      eve,
+      morn,
+      night
+    } = arrDaily[index].temp;
+
+    const tempFeels = arrDaily[index].feels_like;
+
+    descDetailMain.innerText = description;
+    iconDetailMain.style.backgroundImage = `url('http://openweathermap.org/img/wn/${icon}@4x.png')`;
+    windDailyDetail.innerText = wind_speed;
+    dewpointDailyDetail.innerText = Math.round(dew_point);
+    uviDailyDetail.innerText = uvi;
+    pressureDailyDetail.innerText = pressure;
+    humidityDailyDetail.innerText = humidity;
+    minDetailMain.innerText = Math.round(min);
+    maxDetailMain.innerText = Math.round(max);
+
+    mornfeelDetailMain.innerText = `${Math.round(tempFeels.morn)}°C`;
+    mornDetailMain.innerText = `${Math.round(morn)}°C`;
+
+    dayfeelDetailMain.innerText = `${Math.round(tempFeels.day)}°C`;
+    dayDetailMain.innerText = `${Math.round(day)}°C`;
+
+    evefeelDetailMain.innerText = `${Math.round(tempFeels.eve)}°C`;
+    eveDetailMain.innerText = `${Math.round(eve)}°C`;
+
+    nightfeelDetailMain.innerText = `${Math.round(tempFeels.day)}°C`;
+    nightDetailMain.innerText = `${Math.round(night)}°C`;
+
+    sunriseDetailMain.innerText = timeConverter(sunrise, data.timezone)
+    sunsetDetailMain.innerText = timeConverter(sunset, data.timezone)
   }
 
+  arrDailyForecast.map((element, index) => {
+    element.addEventListener('click', _ => {
+      displayDailyDetai(index)
+      arrTimeDetailMain[index].classList.add('is-active')
+      util.getSiblings(arrTimeDetailMain[index]).map(getSIb => getSIb.classList.remove('is-active'))
+      document.querySelector(".js-daily-detail").classList.add('is-active')
+    })
+  });
 
+  arrTimeDetailMain.map((element, index) => {
+    element.addEventListener('click', e => {
+      element.classList.add('is-active')
+      util.getSiblings(element).map(getSIb => getSIb.classList.remove('is-active'))
+      displayDailyDetai(index)
+    })
+  });
+
+  document.querySelector('.js-close').addEventListener('click', _=> {
+    document.querySelector(".js-daily-detail").classList.remove('is-active')
+  })
+
+  return data;
 }
 
 const status = response => {

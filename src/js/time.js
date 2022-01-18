@@ -1,15 +1,15 @@
 let timeNow = document.querySelector(".js-weather-current__time");
 
-const timeConverter = (UNIX_timestamp) => {
-  var a = new Date(UNIX_timestamp * 1000);
-  var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  let arrDay = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
-  var year = a.getFullYear();
-  var month = months[a.getMonth()];
-  var date = a.getDate();
-  var time = date + ' ' + month + ' ' + year ;
-  return time;
-}
+// const timeConverter = (UNIX_timestamp) => {
+//   var a = new Date(UNIX_timestamp * 1000);
+//   var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+//   let arrDay = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+//   var year = a.getFullYear();
+//   var month = months[a.getMonth()];
+//   var date = a.getDate();
+//   var time = date + ' ' + month + ' ' + year ;
+//   return time;
+// }
 
 const realTime = _ => {
   let d = new Date();
@@ -25,5 +25,5 @@ const realTime = _ => {
 }
 
 export const time = _ => {
-  setInterval(realTime(), 1000);
+  setInterval(realTime, 1000);
 }
