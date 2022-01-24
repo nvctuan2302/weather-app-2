@@ -1,4 +1,5 @@
 import * as util from './util'
+import { chart } from './chart';
 
 const nameCity = document.querySelector(".js-weather-current__name");
 const descriptionWeather = document.querySelector(".js-weather-current__desc");
@@ -81,7 +82,7 @@ const displayWeatherCurrent = data => {
 };
 
 
-function dayConverter(UNIX_timestamp) {
+const dayConverter = UNIX_timestamp => {
   let time = new Date(UNIX_timestamp * 1000);
   let arrDay = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
   let day = time.getDay();
@@ -91,7 +92,7 @@ function dayConverter(UNIX_timestamp) {
   return `${arrDay[day]} ${date} / ${month}`
 }
 
-function timeConverter(UNIX_timestamp, timezone) {
+const timeConverter = (UNIX_timestamp, timezone) => {
   let times = new Date(UNIX_timestamp * 1000);
   let timeConverter = new Date(times.toLocaleString('en-US', { timeZone: timezone }));
   let hours = timeConverter.getHours();
@@ -180,7 +181,7 @@ const displayDailyForecast = data => {
     })
   });
 
-  document.querySelector('.js-close').addEventListener('click', _=> {
+  document.querySelector('.js-close').addEventListener('click', _ => {
     document.querySelector(".js-daily-detail").classList.remove('is-active')
   })
 
@@ -188,9 +189,9 @@ const displayDailyForecast = data => {
 }
 
 const status = response => {
-  // if ((response.status >= 200 && response.status < 300) || response.status === 404) {
-  return response.json();
-  // }
+  if ((response.status >= 200 && response.status < 300) || response.status === 404) {
+    return response.json();
+  }
 };
 
 const error = error => {
@@ -207,6 +208,7 @@ const getData = url => {
         .then(status)
         .then(displayWeatherCurrent)
         .then(displayDailyForecast)
+        .then(chart)
     }).catch(error)
 }
 

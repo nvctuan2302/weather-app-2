@@ -50,11 +50,18 @@
 
 .weather-forecast {
   &__chart {
+    margin-top: 15px;
+    overflow: auto;
+
+    .wrap-chart {
+      width: 2300px;
+      height: 320px;
+    }
   }
 
   &__daily {
     position: relative;
-    margin-top: 14px;
+    margin-top: 15px;
 
     .daily-list {
       display: flex;
@@ -105,7 +112,7 @@
       opacity: 0;
       pointer-events: none;
       background-color: $color-white;
-      transition: .5s all ease-in;
+      transition: 0.3s all ease-in;
 
       &.is-active {
         opacity: 1;
@@ -188,4 +195,8 @@
       margin-right: 50px;
     }
   }
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
