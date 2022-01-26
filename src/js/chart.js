@@ -1,5 +1,22 @@
 import Chart from "chart.js";
-import { dropRight } from "lodash";
+// import { dropRight } from "lodash";
+
+const timeConverter = (UNIX_timestamp, timezone) => {
+  let times = new Date(UNIX_timestamp * 1000);
+  let timeConverter = new Date(times.toLocaleString('en-US', { timeZone: timezone }));
+  let hours = timeConverter.getHours();
+
+  return `${hours}`;
+}
+
+const timeConverter2 = (UNIX_timestamp, timezone) => {
+  let times = new Date(UNIX_timestamp * 1000);
+  let timeConverter2 = new Date(times.toLocaleString('en-US', { timeZone: timezone }));
+  let date = timeConverter2.getDate();
+  let month = timeConverter2.getMonth() + 1;
+
+  return `${date} / ${month}`;
+}
 
 export const chart = data => {
   const ctx = document.getElementById("myChart");
@@ -8,33 +25,31 @@ export const chart = data => {
   const arrTemp = data.hourly.map(item => Math.round(item.temp))
   const arrIndex = data.hourly.map((item, index) => item)
 
-  console.log(arrIndex);
-
-
   let min = Math.min(...arrTemp)
   let max = Math.max(...arrTemp)
-  console.log("min " + min);
-  console.log("max " + max);
 
-  console.log(max - min);
 
   const myChart = new Chart(ctx, {
     type: "line",
     data: {
       labels: arrIndex,
-      datasets: [
-        {
-          data: arrTemp,
-          borderColor: 'rgb(235,110,75)',
-          backgroundColor: 'rgba(0, 0, 0, 0)',
-          borderWidth: 2,
-          pointBorderColor: 'rgba(0, 0, 0, 0)',
-        },
-        {
-          data: arrIndex,
-          xAxisID: 'second-y-axis',
-        }
-      ],
+      datasets: [{
+        data: arrTemp,
+        borderColor: 'rgb(235,110,75)',
+        backgroundColor: 'rgba(0, 0, 0, 0)',
+        borderWidth: 2,
+        pointBorderColor: 'rgba(0, 0, 0, 0)',
+      }, {
+        data: arrIndex,
+        xAxisID: 'wind',
+      }, {
+      }, {
+        data: arrIndex,
+        xAxisID: 'time',
+      }, {
+        data: arrIndex,
+        xAxisID: 'description',
+      }],
     },
 
     options: {
@@ -44,7 +59,7 @@ export const chart = data => {
 
       layout: {
         padding: {
-          top: 100
+          // top: 50
         }
       },
 
@@ -59,49 +74,92 @@ export const chart = data => {
 
       scales: {
 
-        yAxes:
-          [
-            {
-              gridLines: {
-                display: true,
-              },
-              ticks: {
-                stepSize: max - min < 5 ? 1 : (max - min < 8 ? 2 : 5),
-                callback: value => `${value}°C`,
-                fontColor: 'rgb(235,110,75)',
-                padding: 10,
+        yAxes: [{
+          gridLines: {
+            display: false,
+          },
 
-              }
-            }
+          ticks: {
+            stepSize: max - min < 5 ? 1 : (max - min < 8 ? 2 : 5),
+            callback: value => `${value}°C`,
+            fontColor: 'rgb(235,110,75)',
+            padding: 15,
 
-          ],
-        xAxes:
-          [
-            {
+          }
+        }],
 
-              gridLines: {
-                display: true,
+        xAxes: [{
+          gridLines: {
+            display: false,
+          },
 
-              },
-              ticks: {
-                fontSize: 10,
-                callback: value => value.humidity,
-                maxRotation: 0,
+          ticks: {
+            fontColor: 'rgb(120,203,191)',
+            fontSize: 12,
+            callback: value => `${(value.pop * 100).toFixed()}%`,
+            maxRotation: 0,
 
-              }
+          }
+        }, {
+          id: 'description',
+          type: 'category',
+          position: 'bottom',
+
+          gridLines: {
+            display: true,
+            drawOnChartArea: false
+          },
+
+          ticks: {
+            fontSize: 10,
+            callback: value => {
+              let a = value.weather[0].description
+
+
+              let cc = `${a.split(' ')[0]}\n${a.split(' ')[1]}`
+
+              return cc
             },
-            {
-              id: 'second-y-axis',
-              type: 'category',
-              position: 'top',
+            maxRotation: 0,
+          }
+        }, {
+          id: 'wind',
+          type: 'category',
+          position: 'bottom',
 
-              ticks: {
-                fontSize: 10,
-                callback: value => value.pressure,
-                maxRotation: 0,
-              }
-            }
-          ],
+          gridLines: {
+            display: false,
+          },
+
+          ticks: {
+            fontSize: 10,
+            callback: value => `${(value.wind_speed).toFixed(1)}m/s`,
+            maxRotation: 0,
+          }
+        }, {
+          id: 'time',
+          type: 'category',
+          position: 'top',
+
+          gridLines: {
+            display: false,
+          },
+
+          ticks: {
+            fontSize: 12,
+            callback: (value, index, arr) => {
+              value.dt = `${(timeConverter(value.dt, data.timezone))}h` === '0h' ?
+                `${(timeConverter2(value.dt, data.timezone))}` :
+                `${(timeConverter(value.dt, data.timezone))}h`
+
+              arr[0].dt = 'Hiện tại';
+
+              return value.dt
+            },
+            maxRotation: 0,
+            padding: 20
+          }
+        }],
       },
     },
   });

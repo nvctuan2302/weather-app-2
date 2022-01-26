@@ -54,7 +54,7 @@
     overflow: auto;
 
     .wrap-chart {
-      width: 2300px;
+      width: 2800px;
       height: 320px;
     }
   }
@@ -82,9 +82,10 @@
       }
 
       &__desc {
-        text-transform: capitalize;
-        width: 130px;
+        font-size: 12px;
+        width: 68px;
         text-align: right;
+        line-height: 1.4;
       }
 
       &__icon {
