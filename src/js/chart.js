@@ -20,6 +20,7 @@ const timeConverter2 = (UNIX_timestamp, timezone) => {
 
 export const chart = data => {
   const ctx = document.getElementById("myChart");
+  const ctx1 = document.getElementById("myChart1");
 
 
   const arrTemp = data.hourly.map(item => Math.round(item.temp))
@@ -53,13 +54,14 @@ export const chart = data => {
     },
 
     options: {
+      responsive: true,
       maintainAspectRatio: false,
 
       events: [], // tắt các sự kiện khi tác động vào biểu đồ
 
       layout: {
         padding: {
-          // top: 50
+          left: -5
         }
       },
 
@@ -82,8 +84,8 @@ export const chart = data => {
           ticks: {
             stepSize: max - min < 5 ? 1 : (max - min < 8 ? 2 : 5),
             callback: value => `${value}°C`,
-            fontColor: 'rgb(235,110,75)',
-            padding: 15,
+            fontColor: 'rgba(0,0,0,0)',
+            padding: -10,
 
           }
         }],
@@ -163,4 +165,67 @@ export const chart = data => {
       },
     },
   });
+  const myChart1 = new Chart(ctx1, {
+    type: "line",
+    data: {
+      labels: arrIndex,
+      datasets: [{
+        data: arrTemp,
+      }],
+    },
+
+    options: {
+      maintainAspectRatio: false,
+
+      events: [], // tắt các sự kiện khi tác động vào biểu đồ
+
+      layout: {
+        padding: {
+          top: 50,
+          left: -5,
+          bottom: 53
+        }
+      },
+
+      legend: {
+        display: false,
+      },
+
+      tooltips: {
+        enabled: false
+      },
+
+
+      scales: {
+
+        yAxes: [{
+          gridLines: {
+            display: false,
+          },
+
+          ticks: {
+            stepSize: max - min < 5 ? 1 : (max - min < 8 ? 2 : 5),
+            callback: value => `${value}°C`,
+            fontColor: 'rgb(235,110,75)',
+          }
+        }],
+
+        xAxes: [{
+          gridLines: {
+            display: false,
+          },
+
+          ticks: {
+            fontColor:'rgba(0, 0, 0, 0)',
+            fontSize: 12,
+            callback: value => `${(value.pop * 100).toFixed()}%`,
+            maxRotation: 0,
+
+          }
+        }],
+      },
+    },
+  });
+
+
 };

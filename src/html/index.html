@@ -64,16 +64,22 @@
 
   <section class="section--sm">
     <div class="container">
-      <div class="row">
-        <div class="col-7">
+      <div class="row is-between">
+        <div class="col-6">
           <h3 class="u-bold u-fontsize-20">Dự báo trong 48 giờ</h3>
+
           <div class="weather-forecast__chart">
-            <div class="wrap-chart">
-              <canvas class="chart" id="myChart"></canvas>
+            <div class="container-chart">
+              <div class="wrap-chart">
+                <canvas class="chart" id="myChart"></canvas>
+              </div>
             </div>
+            <canvas class="y-axis" id="myChart1"></canvas>
           </div>
+
+
         </div>
-        <div class="col-5">
+        <div class="col-6 u-pl-30">
           <h3 class="u-bold u-fontsize-20">Dự báo trong 8 ngày</h3>
           <div class="weather-forecast__daily">
             <div class="wrap-list">

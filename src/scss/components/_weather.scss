@@ -51,11 +51,25 @@
 .weather-forecast {
   &__chart {
     margin-top: 15px;
-    overflow: auto;
+    position: relative;
 
-    .wrap-chart {
-      width: 2800px;
-      height: 320px;
+    .y-axis {
+      position: absolute;
+      z-index: -99;
+      top: 0;
+      left: 0;
+    }
+
+    .container-chart {
+      overflow: auto;
+      background-color: white;
+      transform: translateX(34px);
+
+
+      .wrap-chart {
+        width: 2300px;
+        height: 320px;
+      }
     }
   }
 
