@@ -57,13 +57,13 @@
       position: absolute;
       z-index: -99;
       top: 0;
-      left: 0;
+      left: -15px;
     }
 
     .container-chart {
       overflow: auto;
-      background-color: white;
-      transform: translateX(34px);
+      background-color: $color-white;
+      transform: translateX(22px);
 
 
       .wrap-chart {

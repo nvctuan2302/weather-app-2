@@ -20,15 +20,13 @@ const timeConverter2 = (UNIX_timestamp, timezone) => {
 
 export const chart = data => {
   const ctx = document.getElementById("myChart");
-  const ctx1 = document.getElementById("myChart1");
-
+  const myPositionYaxis = document.getElementById("myChart1");
 
   const arrTemp = data.hourly.map(item => Math.round(item.temp))
   const arrIndex = data.hourly.map((item, index) => item)
 
   let min = Math.min(...arrTemp)
   let max = Math.max(...arrTemp)
-
 
   const myChart = new Chart(ctx, {
     type: "line",
@@ -59,12 +57,6 @@ export const chart = data => {
 
       events: [], // tắt các sự kiện khi tác động vào biểu đồ
 
-      layout: {
-        padding: {
-          left: -5
-        }
-      },
-
       legend: {
         display: false,
       },
@@ -72,7 +64,6 @@ export const chart = data => {
       tooltips: {
         enabled: false
       },
-
 
       scales: {
 
@@ -83,9 +74,8 @@ export const chart = data => {
 
           ticks: {
             stepSize: max - min < 5 ? 1 : (max - min < 8 ? 2 : 5),
-            callback: value => `${value}°C`,
             fontColor: 'rgba(0,0,0,0)',
-            padding: -10,
+            padding: -10
 
           }
         }],
@@ -118,7 +108,7 @@ export const chart = data => {
               let a = value.weather[0].description
 
 
-              let cc = `${a.split(' ')[0]}\n${a.split(' ')[1]}`
+              let cc = `${a.split(' ')[0]}\n${a.split(' ')[1]}  `
 
               return cc
             },
@@ -165,10 +155,12 @@ export const chart = data => {
       },
     },
   });
-  const myChart1 = new Chart(ctx1, {
+
+  // Fixed positioning on y-axis
+  const positionYaxis = new Chart(myPositionYaxis, {
     type: "line",
     data: {
-      labels: arrIndex,
+      labels: arrTemp,
       datasets: [{
         data: arrTemp,
       }],
@@ -177,13 +169,10 @@ export const chart = data => {
     options: {
       maintainAspectRatio: false,
 
-      events: [], // tắt các sự kiện khi tác động vào biểu đồ
-
       layout: {
         padding: {
           top: 50,
-          left: -5,
-          bottom: 53
+          bottom: 58
         }
       },
 
@@ -191,41 +180,16 @@ export const chart = data => {
         display: false,
       },
 
-      tooltips: {
-        enabled: false
-      },
-
-
       scales: {
-
         yAxes: [{
-          gridLines: {
-            display: false,
-          },
-
           ticks: {
             stepSize: max - min < 5 ? 1 : (max - min < 8 ? 2 : 5),
             callback: value => `${value}°C`,
             fontColor: 'rgb(235,110,75)',
-          }
-        }],
-
-        xAxes: [{
-          gridLines: {
-            display: false,
-          },
-
-          ticks: {
-            fontColor:'rgba(0, 0, 0, 0)',
-            fontSize: 12,
-            callback: value => `${(value.pop * 100).toFixed()}%`,
-            maxRotation: 0,
-
+            padding: 20
           }
         }],
       },
     },
   });
-
-
 };
