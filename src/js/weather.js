@@ -1,5 +1,10 @@
 import * as util from './util'
 import { chart } from './chart';
+// import L from 'leaflet';
+
+
+
+
 
 const nameCity = document.querySelector(".js-weather-current__name");
 const descriptionWeather = document.querySelector(".js-weather-current__desc");
@@ -198,6 +203,25 @@ const error = error => {
   alert(`Không tìm thấy thành phố !!!!`);
 }
 
+let map = null
+const initializingMap = _ => {
+  if (map !== undefined && map !== null) { map.remove(); }
+}
+
+const weatherMap = data => {
+  initializingMap()
+
+  map = L.map('map').setView([data.lat, data.lon], 12);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  L.marker([data.lat, data.lon]).addTo(map)
+
+  return data
+}
+
 const getData = url => {
   fetch(`${url}`)
     .then(status)
@@ -208,6 +232,7 @@ const getData = url => {
         .then(status)
         .then(displayWeatherCurrent)
         .then(displayDailyForecast)
+        .then(weatherMap)
         .then(chart)
     }).catch(error)
 }

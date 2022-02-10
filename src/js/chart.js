@@ -1,5 +1,4 @@
 import Chart from "chart.js";
-// import { dropRight } from "lodash";
 
 const timeConverter = (UNIX_timestamp, timezone) => {
   let times = new Date(UNIX_timestamp * 1000);
@@ -28,7 +27,7 @@ export const chart = data => {
   let min = Math.min(...arrTemp)
   let max = Math.max(...arrTemp)
 
-  const myChart = new Chart(ctx, {
+  const myChart = new Chart(ctx,  {
     type: "line",
     data: {
       labels: arrIndex,
