@@ -1,23 +1,7 @@
-import Chart from "chart.js";
+import { Chart } from "chart.js";
+import { timeConverter } from "./time"
 
-const timeConverter = (UNIX_timestamp, timezone) => {
-  let times = new Date(UNIX_timestamp * 1000);
-  let timeConverter = new Date(times.toLocaleString('en-US', { timeZone: timezone }));
-  let hours = timeConverter.getHours();
-
-  return `${hours}`;
-}
-
-const timeConverter2 = (UNIX_timestamp, timezone) => {
-  let times = new Date(UNIX_timestamp * 1000);
-  let timeConverter2 = new Date(times.toLocaleString('en-US', { timeZone: timezone }));
-  let date = timeConverter2.getDate();
-  let month = timeConverter2.getMonth() + 1;
-
-  return `${date} / ${month}`;
-}
-
-export const chart = data => {
+export const displayWeatherChart = data => {
   const ctx = document.getElementById("myChart");
   const myPositionYaxis = document.getElementById("myChart1");
 
@@ -27,7 +11,7 @@ export const chart = data => {
   let min = Math.min(...arrTemp)
   let max = Math.max(...arrTemp)
 
-  const myChart = new Chart(ctx,  {
+  const myChart = new Chart(ctx, {
     type: "line",
     data: {
       labels: arrIndex,
@@ -105,10 +89,7 @@ export const chart = data => {
             fontSize: 10,
             callback: value => {
               let a = value.weather[0].description
-
-
-              let cc = `${a.split(' ')[0]}\n${a.split(' ')[1]}  `
-
+              let cc = `${a.split(' ')[0]}\n${a.split(' ')[1]}`
               return cc
             },
             maxRotation: 0,
@@ -139,12 +120,11 @@ export const chart = data => {
           ticks: {
             fontSize: 12,
             callback: (value, index, arr) => {
-              value.dt = `${(timeConverter(value.dt, data.timezone))}h` === '0h' ?
-                `${(timeConverter2(value.dt, data.timezone))}` :
-                `${(timeConverter(value.dt, data.timezone))}h`
+              value.dt = `${(timeConverter(value.dt, data.timezone, 'hours'))}h` === '0h' ?
+                `${(timeConverter(value.dt, data.timezone, 'dateMonth'))}` :
+                `${(timeConverter(value.dt, data.timezone, 'hours'))}h`
 
               arr[0].dt = 'Hiện tại';
-
               return value.dt
             },
             maxRotation: 0,
@@ -191,4 +171,6 @@ export const chart = data => {
       },
     },
   });
+
+  return data
 };

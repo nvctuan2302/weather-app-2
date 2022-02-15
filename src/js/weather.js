@@ -1,10 +1,7 @@
 import * as util from './util'
-import { chart } from './chart';
-// import L from 'leaflet';
-
-
-
-
+import { displayWeatherChart } from './chart';
+import { displayWeatherMap } from './map'
+import { timeConverter } from './time';
 
 const nameCity = document.querySelector(".js-weather-current__name");
 const descriptionWeather = document.querySelector(".js-weather-current__desc");
@@ -36,7 +33,6 @@ const pressureDailyDetail = document.querySelector(".daily-detail__body .js-expa
 const humidityDailyDetail = document.querySelector(".daily-detail__body .js-expand-list__humidity");
 
 const arrTimeDetailMain = [...document.querySelectorAll(".js-daily-detail__header .js-daily-list__item")];
-
 
 const descDetailMain = document.querySelector(".js-detail-main__desc");
 const minDetailMain = document.querySelector(".js-detail-main__min");
@@ -86,26 +82,6 @@ const displayWeatherCurrent = data => {
   return data;
 };
 
-
-const dayConverter = UNIX_timestamp => {
-  let time = new Date(UNIX_timestamp * 1000);
-  let arrDay = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
-  let day = time.getDay();
-  let month = time.getMonth() + 1;
-  let date = time.getDate();
-
-  return `${arrDay[day]} ${date} / ${month}`
-}
-
-const timeConverter = (UNIX_timestamp, timezone) => {
-  let times = new Date(UNIX_timestamp * 1000);
-  let timeConverter = new Date(times.toLocaleString('en-US', { timeZone: timezone }));
-  let hours = timeConverter.getHours();
-  let min = times.getMinutes();
-
-  return `${hours}:${min}`;
-}
-
 const displayDailyForecast = data => {
 
   const arrDaily = data.daily.map((data, index) => {
@@ -113,8 +89,8 @@ const displayDailyForecast = data => {
     arrIconDailyForecast[index].style.backgroundImage =
       `url('http://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png')`;
     arrTempDailyForecast[index].innerText = `${Math.round(data.temp.min)} / ${Math.round(data.temp.max)}`;
-    arrTimeDailyForecast[index].innerText = (dayConverter(data.dt));
-    arrTimeDetailMain[index].innerText = (dayConverter(data.dt));
+    arrTimeDailyForecast[index].innerText = (timeConverter(data.dt, data.timezone, ''));
+    arrTimeDetailMain[index].innerText = (timeConverter(data.dt, data.timezone, ''));
 
     return data;
   });
@@ -165,8 +141,8 @@ const displayDailyForecast = data => {
     nightfeelDetailMain.innerText = `${Math.round(tempFeels.day)}°C`;
     nightDetailMain.innerText = `${Math.round(night)}°C`;
 
-    sunriseDetailMain.innerText = timeConverter(sunrise, data.timezone)
-    sunsetDetailMain.innerText = timeConverter(sunset, data.timezone)
+    sunriseDetailMain.innerText = timeConverter(sunrise, data.timezone, 'hoursMin')
+    sunsetDetailMain.innerText = timeConverter(sunset, data.timezone, 'hoursMin')
   }
 
   arrDailyForecast.map((element, index) => {
@@ -179,10 +155,10 @@ const displayDailyForecast = data => {
   });
 
   arrTimeDetailMain.map((element, index) => {
-    element.addEventListener('click', e => {
+    element.addEventListener('click', _ => {
+      displayDailyDetai(index)
       element.classList.add('is-active')
       util.getSiblings(element).map(getSIb => getSIb.classList.remove('is-active'))
-      displayDailyDetai(index)
     })
   });
 
@@ -203,25 +179,6 @@ const error = error => {
   alert(`Không tìm thấy thành phố !!!!`);
 }
 
-let map = null
-const initializingMap = _ => {
-  if (map !== undefined && map !== null) { map.remove(); }
-}
-
-const weatherMap = data => {
-  initializingMap()
-
-  map = L.map('map').setView([data.lat, data.lon], 12);
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
-
-  L.marker([data.lat, data.lon]).addTo(map)
-
-  return data
-}
-
 const getData = url => {
   fetch(`${url}`)
     .then(status)
@@ -232,8 +189,8 @@ const getData = url => {
         .then(status)
         .then(displayWeatherCurrent)
         .then(displayDailyForecast)
-        .then(weatherMap)
-        .then(chart)
+        .then(displayWeatherChart)
+        .then(displayWeatherMap)
     }).catch(error)
 }
 
