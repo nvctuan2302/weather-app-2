@@ -1,7 +1,7 @@
-import { weather } from "./weather";
+import { displayContent } from "./getData";
 import { time } from "./time";
 
 window.addEventListener("DOMContentLoaded", () => {
-  weather();
+  displayContent();
   time();
 });
