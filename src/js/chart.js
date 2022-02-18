@@ -25,12 +25,14 @@ export const displayWeatherChart = data => {
         data: arrIndex,
         xAxisID: 'wind',
       }, {
-      }, {
         data: arrIndex,
         xAxisID: 'time',
       }, {
         data: arrIndex,
-        xAxisID: 'description',
+        xAxisID: 'description01',
+      }, {
+        data: arrIndex,
+        xAxisID: 'description02',
       }],
     },
 
@@ -76,7 +78,7 @@ export const displayWeatherChart = data => {
 
           }
         }, {
-          id: 'description',
+          id: 'description01',
           type: 'category',
           position: 'bottom',
 
@@ -88,11 +90,46 @@ export const displayWeatherChart = data => {
           ticks: {
             fontSize: 10,
             callback: value => {
-              let a = value.weather[0].description
-              let cc = `${a.split(' ')[0]}\n${a.split(' ')[1]}`
-              return cc
+              let getvalue = value.weather[0].description.split(' ')
+              if (getvalue.length === 3) {
+                return `${getvalue[0]}`
+              }
+              else if (getvalue.length === 4) {
+                return `${getvalue[0]} ${getvalue[1]}`
+              }
+              else {
+                return `${getvalue[0]}`
+              }
             },
             maxRotation: 0,
+          }
+        }, {
+          id: 'description02',
+          type: 'category',
+          position: 'bottom',
+
+          gridLines: {
+            display: false,
+          },
+
+          ticks: {
+            fontSize: 10,
+            callback: value => {
+              let getvalue = value.weather[0].description.split(' ')
+              console.log(getvalue.length);
+
+              if (getvalue.length === 3) {
+                return `${getvalue[1]} ${getvalue[2]}`
+              }
+              else if (getvalue.length === 4) {
+                return `${getvalue[2]} ${getvalue[3]}`
+              }
+              else {
+                return `${getvalue[1]}`
+              }
+            },
+            maxRotation: 0,
+            padding: -16
           }
         }, {
           id: 'wind',
@@ -107,6 +144,7 @@ export const displayWeatherChart = data => {
             fontSize: 10,
             callback: value => `${(value.wind_speed).toFixed(1)}m/s`,
             maxRotation: 0,
+            padding: -8
           }
         }, {
           id: 'time',
