@@ -2,37 +2,37 @@ import { Chart } from "chart.js";
 import { timeConverter } from "./time"
 
 export const displayWeatherChart = data => {
-  const ctx = document.getElementById("myChart");
-  const myPositionYaxis = document.getElementById("myChart1");
-
+  const chartWeather = document.getElementById("myChart");
+  const myPositionYaxis = document.getElementById("positionYaxis");
+  const blackColor = 'rgba(0, 0, 0, 0)'
   const arrTemp = data.hourly.map(item => Math.round(item.temp))
-  const arrIndex = data.hourly.map((item, index) => item)
+  const arrData = data.hourly.map(item => item)
 
-  let min = Math.min(...arrTemp)
-  let max = Math.max(...arrTemp)
+  let stepTemp =
+    Math.min(arrTemp) - Math.max(arrTemp) < 5
+      ? 1 :
+      Math.min(arrTemp) - Math.max(arrTemp) < 8
+        ? 2 :
+        5
 
-  const myChart = new Chart(ctx, {
+  new Chart(chartWeather, {
     type: "line",
     data: {
-      labels: arrIndex,
+      labels: arrData,
       datasets: [{
         data: arrTemp,
         borderColor: 'rgb(235,110,75)',
-        backgroundColor: 'rgba(0, 0, 0, 0)',
         borderWidth: 2,
-        pointBorderColor: 'rgba(0, 0, 0, 0)',
+        backgroundColor: blackColor,
+        pointBorderColor: blackColor,
       }, {
-        data: arrIndex,
         xAxisID: 'wind',
       }, {
-        data: arrIndex,
         xAxisID: 'time',
       }, {
-        data: arrIndex,
-        xAxisID: 'description01',
+        xAxisID: 'descriptionTop',
       }, {
-        data: arrIndex,
-        xAxisID: 'description02',
+        xAxisID: 'descriptionBottom',
       }],
     },
 
@@ -40,7 +40,7 @@ export const displayWeatherChart = data => {
       responsive: true,
       maintainAspectRatio: false,
 
-      events: [], // tắt các sự kiện khi tác động vào biểu đồ
+      events: [], // turn off events
 
       legend: {
         display: false,
@@ -58,8 +58,8 @@ export const displayWeatherChart = data => {
           },
 
           ticks: {
-            stepSize: max - min < 5 ? 1 : (max - min < 8 ? 2 : 5),
-            fontColor: 'rgba(0,0,0,0)',
+            stepSize: stepTemp,
+            fontColor: 'blackColor',
             padding: -10
 
           }
@@ -78,7 +78,7 @@ export const displayWeatherChart = data => {
 
           }
         }, {
-          id: 'description01',
+          id: 'descriptionTop',
           type: 'category',
           position: 'bottom',
 
@@ -90,21 +90,23 @@ export const displayWeatherChart = data => {
           ticks: {
             fontSize: 10,
             callback: value => {
-              let getvalue = value.weather[0].description.split(' ')
-              if (getvalue.length === 3) {
-                return `${getvalue[0]}`
-              }
-              else if (getvalue.length === 4) {
-                return `${getvalue[0]} ${getvalue[1]}`
-              }
-              else {
-                return `${getvalue[0]}`
+              let descriptionTop = value.weather[0].description.split(' ')
+
+              switch (descriptionTop.length) {
+                case 3:
+                  return `${descriptionTop[0]}`
+                  break
+                case 4:
+                  return `${descriptionTop[0]} ${descriptionTop[1]}`
+                  break
+                default:
+                  return `${descriptionTop[0]}`
               }
             },
             maxRotation: 0,
           }
         }, {
-          id: 'description02',
+          id: 'descriptionBottom',
           type: 'category',
           position: 'bottom',
 
@@ -115,17 +117,17 @@ export const displayWeatherChart = data => {
           ticks: {
             fontSize: 10,
             callback: value => {
-              let getvalue = value.weather[0].description.split(' ')
-              console.log(getvalue.length);
+              let descriptionBottom = value.weather[0].description.split(' ')
 
-              if (getvalue.length === 3) {
-                return `${getvalue[1]} ${getvalue[2]}`
-              }
-              else if (getvalue.length === 4) {
-                return `${getvalue[2]} ${getvalue[3]}`
-              }
-              else {
-                return `${getvalue[1]}`
+              switch (descriptionBottom.length) {
+                case 3:
+                  return `${descriptionBottom[1]} ${descriptionBottom[2]}`
+                  break
+                case 4:
+                  return `${descriptionBottom[2]} ${descriptionBottom[3]}`
+                  break
+                default:
+                  return `${descriptionBottom[1]}`
               }
             },
             maxRotation: 0,
@@ -142,7 +144,7 @@ export const displayWeatherChart = data => {
 
           ticks: {
             fontSize: 10,
-            callback: value => `${(value.wind_speed).toFixed(1)}m/s`,
+            callback: value => `${value.wind_speed.toFixed(1)}m/s`,
             maxRotation: 0,
             padding: -8
           }
@@ -157,12 +159,13 @@ export const displayWeatherChart = data => {
 
           ticks: {
             fontSize: 12,
-            callback: (value, index, arr) => {
+            callback: (value, _, arr) => {
               value.dt = `${(timeConverter(value.dt, data.timezone, 'hours'))}h` === '0h' ?
                 `${(timeConverter(value.dt, data.timezone, 'dateMonth'))}` :
                 `${(timeConverter(value.dt, data.timezone, 'hours'))}h`
 
               arr[0].dt = 'Hiện tại';
+
               return value.dt
             },
             maxRotation: 0,
@@ -174,7 +177,7 @@ export const displayWeatherChart = data => {
   });
 
   // Fixed positioning on y-axis
-  const positionYaxis = new Chart(myPositionYaxis, {
+  new Chart(myPositionYaxis, {
     type: "line",
     data: {
       labels: arrTemp,
@@ -200,7 +203,7 @@ export const displayWeatherChart = data => {
       scales: {
         yAxes: [{
           ticks: {
-            stepSize: max - min < 5 ? 1 : (max - min < 8 ? 2 : 5),
+            stepSize: stepTemp,
             callback: value => `${value}°C`,
             fontColor: 'rgb(235,110,75)',
             padding: 20
