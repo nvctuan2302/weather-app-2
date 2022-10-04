@@ -102,6 +102,12 @@ export const displayDailyForecast = data => {
   });
 
   arrTimeDetailMain.map((element, index) => {
+
+    let hasIsActive = element.classList.contains('is-active')
+    if (hasIsActive) {
+      displayDailyDetai(index)
+    }
+
     element.addEventListener('click', _ => {
       displayDailyDetai(index)
       element.classList.add('is-active')
